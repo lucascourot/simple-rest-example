@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>A simple REST Example</title>
+</head>
+	<body>
+        <div id="container">
+            <header>
+                <h1>A simple REST Example for Supinfo 3WEB</h1>
+            </header>
+
+            <section>
+                <fieldset>
+                    <legend>Add a new student</legend>
+
+                    <form action="." method="get" id="add-student">
+                        <p><label>Birthdate <input type="date" name="birthDate" /></label></p>
+                        <p><label>Firstname <input type="text" name="firstName" /></label></p>
+                        <p><label>Lastname <input type="text" name="lastName" /></label></p>
+                        <p><label>ID Booster <input type="number" name="idBooster" /></label></p>
+                        <p><input type="submit" value="Add" /></p>
+                    </form>
+                </fieldset>
+
+                <p><a href="#" id="load">Load users</a></p>
+                <div id="students"></div>
+            </section>
+        </div>
+        <script src="script.js"></script>
+	</body>
+</html>
