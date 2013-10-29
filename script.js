@@ -4,9 +4,29 @@ var async         = true;
 var listContainer = document.getElementById("students");
 var loadLink      = document.getElementById("load"); // link to load the students
 var addLink       = document.querySelector('form#add-student input[type=submit]'); // link to add a student
+var birthDate     = document.querySelector("input[name=birthDate]");
 var firstName     = document.querySelector("input[name=firstName]");
 var lastName      = document.querySelector("input[name=lastName]");
 var idBooster     = document.querySelector("input[name=idBooster]");
+
+var createDateObjectFromHtmlInput = function (inputDate) {
+    var year  = parseInt(inputDate.substr(0,4));
+    var month = parseInt(inputDate.substr(5,2));
+    var day   = parseInt(inputDate.substr(8,2));
+
+    return new Date(year, month, day, 0, 0, 0, 0);
+};
+
+Date.prototype.getIsoUtcDateTime = function () {
+    var pad = function (val, len) {
+        val = String(val);
+        len = len || 2;
+        while (val.length < len) val = "0" + val;
+        return val;
+    };
+
+    return this.getFullYear() + '-' + pad(this.getMonth()) + '-' + pad(this.getDate()) + 'T00:00:00.604Z';
+};
 
 // XHR init
 var xhr         = null;
@@ -78,12 +98,13 @@ var deleteStudent = function(event) {
 
 var addStudent = function(event) {
     event.preventDefault();
+    var birthFormattedDate = createDateObjectFromHtmlInput(birthDate.value);
 
     xhr.open('POST', url + "/students", async);
     xhr.setRequestHeader("Content-type","application/xml; charset=utf-8");
     //xhr.setRequestHeader('Authorization', 'Basic token');
     xhr.send("<student>\
-        <birthDate>5287-09-16T12:03:26.590Z</birthDate>\
+        <birthDate>" + birthFormattedDate.getIsoUtcDateTime() + "</birthDate>\
         <firstName>" + firstName.value + "</firstName>\
         <idBooster>" + idBooster.value + "</idBooster>\
         <lastName>" + lastName.value + "</lastName>\
