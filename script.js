@@ -1,5 +1,5 @@
 
-var url           = "http://restful-example.appspot.com";
+var url           = "http://restful-demo.appspot.com";
 var async         = true;
 var listContainer = document.getElementById("students");
 var loadLink      = document.getElementById("load"); // link to load the students
